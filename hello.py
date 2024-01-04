@@ -8,9 +8,7 @@
 # print(name.lower())
 # print(name.upper())
 # print(name.title())
-
-x,y,z = 0,1,3
-print(x,"\n",y,"\n",z)
+import this
 
 
 
