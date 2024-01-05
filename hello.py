@@ -7,8 +7,9 @@
 # name = "xu JIngyan"
 # print(name.lower())
 # print(name.upper())
-# print(name.title())
-import this
+# print(name.title()
 
-
+bikes=['trek','redline','specialized']
+msg=f"my first bike is {bikes[0].title()}"
+print(msg)
 
