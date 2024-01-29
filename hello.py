@@ -29,25 +29,27 @@
 # for user in confirmed_users:
 #     print(user.title())
 
+class Dog:
+    """class Dog"""
 
-# -- coding utf-8 --
-# Python 3
-import base64
-import http.client
+    def __init__(self, name, age):
+        """初始化属性 name 和 age"""
+        self.name = name
+        self.age = age
 
-# 客户 ID
-# 需要设置环境变量 AGORA_CUSTOMER_KEY
-customer_key = "82cc701512f547cd8ec0f9a21dfd60a8"
-# 客户密钥
-# 需要设置环境变量 AGORA_CUSTOMER_SECRET
-customer_secret = "8778f20d63b24b6895a45181cd3d2463"
+    def sit(self):
+        """模拟小狗收到命令时坐下"""
+        print(f"{self.name} is now sitting!")
 
-# 拼接客户 ID 和客户密钥
-credentials = customer_key + ":" + customer_secret
-# 使用 base64 进行编码
-base64_credentials = base64.b64encode(credentials.encode("utf8"))
-credential = base64_credentials.decode("utf8")
-# 创建 authorization header
-basic_auth_header = 'basic ' + credential
+    def roll_over(self):
+        """模拟小狗收到命令时打滚"""
+        print(f"{self.name} rolled over!")
 
-print(basic_auth_header)
+my_dog = Dog('Willie',8)
+print(f"{my_dog.name} is my dog's name.")
+print(f"My dog is {my_dog.age} years old.")
+
+my_dog.sit()
+my_dog.roll_over()
+        
+    
