@@ -119,25 +119,46 @@
 # count_words(path)
 
 
-class AnonymousSurvey:
-    """收集匿名调查问卷的答案"""
+# class AnonymousSurvey:
+#     """收集匿名调查问卷的答案"""
 
-    def __init__(self, question):
-        """存储一个问题，并为存储答案做好准备"""
-        self.question = question
-        self.responses = []
+#     def __init__(self, question):
+#         """存储一个问题，并为存储答案做好准备"""
+#         self.question = question
+#         self.responses = []
     
-    def show_question(self):
-        print(self.question)
+#     def show_question(self):
+#         print(self.question)
     
-    def store_response(self, new_response):
-        self.responses.append(new_response)
+#     def store_response(self, new_response):
+#         self.responses.append(new_response)
     
-    def show_results(self):
-        print("Survey_results")
-        for response in self.responses:
-            print(f"- {response}")
+#     def show_results(self):
+#         print("Survey_results")
+#         for response in self.responses:
+#             print(f"- {response}")
 
 
 
 
+# -- coding utf-8 --
+# Python 3
+import base64
+import http.client
+
+# 客户 ID
+# 需要设置环境变量 AGORA_CUSTOMER_KEY
+customer_key = "6336a0f4e91f402dbfea063ffefe19dc"
+# 客户密钥
+# 需要设置环境变量 AGORA_CUSTOMER_SECRET
+customer_secret = "93bb1d1632554928a94ecffd99165990"
+
+# 拼接客户 ID 和客户密钥
+credentials = customer_key + ":" + customer_secret
+# 使用 base64 进行编码
+base64_credentials = base64.b64encode(credentials.encode("utf8"))
+credential = base64_credentials.decode("utf8")
+# 创建 authorization header
+basic_auth_header = 'basic ' + credential
+
+print(basic_auth_header)
