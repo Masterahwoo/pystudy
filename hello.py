@@ -141,24 +141,61 @@
 
 
 
-# -- coding utf-8 --
-# Python 3
-import base64
-import http.client
+# # -- coding utf-8 --
+# # Python 3
+# import base64
+# import http.client
 
-# 客户 ID
-# 需要设置环境变量 AGORA_CUSTOMER_KEY
-customer_key = "6336a0f4e91f402dbfea063ffefe19dc"
-# 客户密钥
-# 需要设置环境变量 AGORA_CUSTOMER_SECRET
-customer_secret = "93bb1d1632554928a94ecffd99165990"
+# # 客户 ID
+# # 需要设置环境变量 AGORA_CUSTOMER_KEY
+# customer_key = "6336a0f4e91f402dbfea063ffefe19dc"
+# # 客户密钥
+# # 需要设置环境变量 AGORA_CUSTOMER_SECRET
+# customer_secret = "93bb1d1632554928a94ecffd99165990"
 
-# 拼接客户 ID 和客户密钥
-credentials = customer_key + ":" + customer_secret
-# 使用 base64 进行编码
-base64_credentials = base64.b64encode(credentials.encode("utf8"))
-credential = base64_credentials.decode("utf8")
-# 创建 authorization header
-basic_auth_header = 'basic ' + credential
+# # 拼接客户 ID 和客户密钥
+# credentials = customer_key + ":" + customer_secret
+# # 使用 base64 进行编码
+# base64_credentials = base64.b64encode(credentials.encode("utf8"))
+# credential = base64_credentials.decode("utf8")
+# # 创建 authorization header
+# basic_auth_header = 'basic ' + credential
 
-print(basic_auth_header)
+# print(basic_auth_header)
+
+
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.RtcTokenBuilder2 import *
+
+
+def main():
+    # 获取环境变量 AGORA_APP_ID 的值。请确保你将该变量设为你在声网控制台获取的 App ID
+    app_id = "7f7f90af45bf4e6684c8955eb6e1aceb"
+    # 获取环境变量 AGORA_APP_CERTIFICATE 的值。请确保你将该变量设为你在声网控制台获取的 App 证书
+    app_certificate = "32c1426af7f3410ab770e2b74f887c96"
+    # 将 channel_name 替换为需要加入的频道名
+    channel_name = "170980175410051"
+    # 填入你实际的用户 ID
+    uid = 123
+    # Token 的有效时间，单位秒
+    token_expiration_in_seconds = 3600
+    # 所有的权限的有效时间，单位秒
+    privilege_expiration_in_seconds = 3600
+
+    print("App Id: %s" % app_id)
+    print("App Certificate: %s" % app_certificate)
+    if not app_id or not app_certificate:
+        print("Need to set environment variable AGORA_APP_ID and AGORA_APP_CERTIFICATE")
+        return
+    # 生成 Token
+    token = RtcTokenBuilder.build_token_with_uid(app_id, app_certificate, channel_name, uid, Role_Subscriber,
+                                                 token_expiration_in_seconds, privilege_expiration_in_seconds)
+    print("Token with int uid: {}".format(token))
+
+
+if __name__ == "__main__":
+    main()
